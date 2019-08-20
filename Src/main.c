@@ -42,60 +42,7 @@
 
 /* USER CODE BEGIN Includes */
 
-#define PMTK_SET_NMEA_UPDATE_100_MILLIHERTZ  "$PMTK220,10000*2F"  ///< Once every 10 seconds, 100 millihertz.
-#define PMTK_SET_NMEA_UPDATE_200_MILLIHERTZ  "$PMTK220,5000*1B"   ///< Once every 5 seconds, 200 millihertz.
-#define PMTK_SET_NMEA_UPDATE_1HZ  "$PMTK220,1000*1F"              ///<  1 Hz
-#define PMTK_SET_NMEA_UPDATE_2HZ  "$PMTK220,500*2B"               ///<  2 Hz
-#define PMTK_SET_NMEA_UPDATE_5HZ  "$PMTK220,200*2C"               ///<  5 Hz
-#define PMTK_SET_NMEA_UPDATE_10HZ "$PMTK220,100*2F"               ///< 10 Hz
-// Position fix update rate commands.
-#define PMTK_API_SET_FIX_CTL_100_MILLIHERTZ  "$PMTK300,10000,0,0,0,0*2C"  ///< Once every 10 seconds, 100 millihertz.
-#define PMTK_API_SET_FIX_CTL_200_MILLIHERTZ  "$PMTK300,5000,0,0,0,0*18"   ///< Once every 5 seconds, 200 millihertz.
-#define PMTK_API_SET_FIX_CTL_1HZ  "$PMTK300,1000,0,0,0,0*1C"              ///< 1 Hz
-#define PMTK_API_SET_FIX_CTL_5HZ  "$PMTK300,200,0,0,0,0*2F"               ///< 5 Hz
-// Can't fix position faster than 5 times a second!
-
-#define PMTK_SET_BAUD_115200 "$PMTK251,115200*1F"  ///< 115200 bps
-#define PMTK_SET_BAUD_57600  "$PMTK251,57600*2C"   ///<  57600 bps
-#define PMTK_SET_BAUD_9600   "$PMTK251,9600*17"    ///<   9600 bps
-
-#define PMTK_SET_NMEA_OUTPUT_GLLONLY "$PMTK314,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on only the GPGLL sentence
-#define PMTK_SET_NMEA_OUTPUT_RMCONLY "$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on only the GPRMC sentence
-#define PMTK_SET_NMEA_OUTPUT_VTGONLY "$PMTK314,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on only the GPVTG
-#define PMTK_SET_NMEA_OUTPUT_GGAONLY "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on just the GPGGA
-#define PMTK_SET_NMEA_OUTPUT_GSAONLY "$PMTK314,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on just the GPGSA
-#define PMTK_SET_NMEA_OUTPUT_GSVONLY "$PMTK314,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0*29"  ///< turn on just the GPGSV
-#define PMTK_SET_NMEA_OUTPUT_RMCGGA  "$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28"  ///< turn on GPRMC and GPGGA
-#define PMTK_SET_NMEA_OUTPUT_ALLDATA "$PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0*28"  ///< turn on ALL THE DATA
-#define PMTK_SET_NMEA_OUTPUT_OFF     "$PMTK314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28"  ///< turn off output
-
-
-// to generate your own sentences, check out the MTK command datasheet and use a checksum calculator
-// such as the awesome http://www.hhhh.org/wiml/proj/nmeaxor.html
-
-#define PMTK_LOCUS_STARTLOG  "$PMTK185,0*22"          ///< Start logging data
-#define PMTK_LOCUS_STOPLOG "$PMTK185,1*23"            ///< Stop logging data
-#define PMTK_LOCUS_STARTSTOPACK "$PMTK001,185,3*3C"   ///< Acknowledge the start or stop command
-#define PMTK_LOCUS_QUERY_STATUS "$PMTK183*38"         ///< Query the logging status
-#define PMTK_LOCUS_ERASE_FLASH "$PMTK184,1*22"        ///< Erase the log flash data
-#define LOCUS_OVERLAP 0                               ///< If flash is full, log will overwrite old data with new logs
-#define LOCUS_FULLSTOP 1                              ///< If flash is full, logging will stop
-
-#define PMTK_ENABLE_SBAS "$PMTK313,1*2E"              ///< Enable search for SBAS satellite (only works with 1Hz output rate)
-#define PMTK_ENABLE_WAAS "$PMTK301,2*2E"              ///< Use WAAS for DGPS correction data
-
-#define PMTK_STANDBY "$PMTK161,0*28"              ///< standby command & boot successful message
-#define PMTK_STANDBY_SUCCESS "$PMTK001,161,3*36"  ///< Not needed currently
-#define PMTK_AWAKE "$PMTK010,002*2D"              ///< Wake up
-
-#define PMTK_Q_RELEASE "$PMTK605*31"              ///< ask for the release and version
-
-
-#define PGCMD_ANTENNA "$PGCMD,33,1*6C"            ///< request for updates on antenna status
-#define PGCMD_NOANTENNA "$PGCMD,33,0*6D"          ///< don't show antenna status messages
-
-#define MAXWAITSENTENCE 10 ///< how long to wait when we're looking for a response
-
+#include "GPS_adafruit.h"
 
 /* USER CODE END Includes */
 
@@ -107,8 +54,11 @@ DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+
+GPS_data hgps;
 char data[100];
-char tx_buffer[100];
+char tx_buffer[256];
+char nao_valido[50];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,6 +73,7 @@ static void MX_USART2_UART_Init(void);
 
 //Funcao para transmitir pelo UART
 void Transmit_USART2(char *send);
+void Transmit_USART1();
 
 /* USER CODE END PFP */
 
@@ -166,20 +117,26 @@ int main(void)
 
 
   /*LED C13 pisca para sinalizar que o progrma comeï¿½ou*/
-     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-     HAL_Delay(500);
-     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-     HAL_Delay(500);
-     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-     HAL_Delay(500);
+	 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+	 HAL_Delay(500);
+	 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+	 HAL_Delay(500);
+	 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+	 HAL_Delay(500);
 
-     Transmit_USART2(PMTK_SET_NMEA_OUTPUT_ALLDATA);
-     Transmit_USART2(PMTK_SET_NMEA_UPDATE_1HZ);
-     //Transmit_USART2(PGCMD_ANTENNA);
+	 common_init(&hgps);
 
-     if(HAL_UART_Receive_DMA(&huart2, (uint8_t*)data, (unsigned)sizeof(data))!= HAL_OK){
-    	 Error_Handler();
-     }
+//	 Transmit_USART2(PMTK_SET_NMEA_OUTPUT_ALLDATA);
+//	 Transmit_USART2(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+//	 Transmit_USART2(PMTK_SET_NMEA_UPDATE_1HZ);
+
+	 Transmit_USART2(PMTK_SET_NMEA_OUTPUT_RMCONLY);
+	 Transmit_USART2(PMTK_SET_NMEA_UPDATE_10HZ);
+	 Transmit_USART2(PGCMD_ANTENNA);
+
+	 if(HAL_UART_Receive_DMA(&huart2, (uint8_t*)data, (unsigned)sizeof(data))!= HAL_OK){
+		 Error_Handler();
+	 }
 
   /* USER CODE END 2 */
 
@@ -323,7 +280,7 @@ static void MX_GPIO_Init(void)
 
 void Transmit_USART2(char *send){
 	HAL_UART_Transmit_DMA(&huart2, (uint8_t*)send, (unsigned)sizeof(send));
-	while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY){}
+	//while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY){}
 
 }
 
@@ -331,10 +288,25 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef *huart){
 
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 	HAL_UART_Transmit_IT(&huart1, huart->pRxBuffPtr, (unsigned) huart->RxXferSize);
-  // Habilita leitura do GPS
+	//if(parse((char*)huart->pRxBuffPtr, &hgps)){
+		//sprintf(tx_buffer, "Hour: %d\tMinutes: %d\tSeconds: %d\tMilliseconds: %d\tYear: %d\tMonth: %d\tDay: %d\tLatitude: %c\tLongitude: %c\tLatitude Valor: %lf\t Longitude Valor: %lf\n", hgps.hour, hgps.minute, hgps.seconds, hgps.milliseconds, hgps.year, hgps.month, hgps.day, hgps.lat, hgps.lon, hgps.latitude, hgps.longitude);/*Mensagem para interface novo jeito, pacote de 50Hz*/
+		//HAL_UART_Transmit_IT(&huart1, (uint8_t*)tx_buffer, (uint16_t)sizeof(tx_buffer));
+	//}
+	//else{
+		//sprintf(nao_valido, "Sem valor válido\n");/*Mensagem para interface novo jeito, pacote de 50Hz*/
+		//HAL_UART_Transmit_IT(&huart1, (uint8_t*)nao_valido, (uint16_t)sizeof(nao_valido));
+	//}
+
+	// Habilita leitura do GPS
 	if(HAL_UART_Receive_DMA(&huart2, (uint8_t*)data, (unsigned)sizeof(data))!= HAL_OK){
 	  Error_Handler();
 	}
+}
+
+
+void Transmit_USART1(){
+	sprintf(tx_buffer, "Hour: %d\tMinutes: %d\tSeconds: %d\tMilliseconds: %d\tYear: %d\tMonth: %d\tDay: %d\tLatitude: %c\tLongitude: %c\tLatitude Valor: %lf\t Longitude Valor: %lf\n", hgps.hour, hgps.minute, hgps.seconds, hgps.milliseconds, hgps.year, hgps.month, hgps.day, hgps.lat, hgps.lon, hgps.latitude, hgps.longitude);/*Mensagem para interface novo jeito, pacote de 50Hz*/
+	HAL_UART_Transmit_IT(&huart1, (uint8_t*)tx_buffer, (uint16_t)sizeof(tx_buffer));
 }
 /* USER CODE END 4 */
 
